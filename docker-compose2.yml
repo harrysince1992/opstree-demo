@@ -1,0 +1,18 @@
+version: '3.0'
+services:
+  web:
+    image: nginx:1.21.6-alpine
+    hostname: 'nginx-opstree'
+    ports:
+    - "8080:80"
+    volumes:
+    - "./nginx/nginx.conf:/etc/nginx/conf.d/default.conf"
+    - "./app/index.html:/usr/share/nginx/html/index.html:ro"
+    - logs_nginx:/var/log/nginx/
+    networks:
+    - demo-net
+volumes:
+  logs_nginx:
+networks:
+  demo-net:
+    driver: bridge
